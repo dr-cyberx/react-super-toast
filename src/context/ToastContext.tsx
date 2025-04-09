@@ -1,19 +1,19 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { ToastType, Toast } from '../types/index';
+import { iToastType, iToast } from '../index';
 import { nanoid } from 'nanoid';
 
 interface ToastContextProps {
-    addToast: (message: string, type?: ToastType, duration?: number) => void;
+    addToast: (message: string, type?: iToastType, duration?: number) => void;
     removeToast: (id: string) => void;
-    toasts: Toast[];
+    toasts: iToast[];
 }
 
 const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
-    const [toasts, setToasts] = useState<Toast[]>([]);
+    const [toasts, setToasts] = useState<iToast[]>([]);
 
-    const addToast = (message: string, type: ToastType = 'default', duration = 3000) => {
+    const addToast = (message: string, type: iToastType = 'default', duration = 3000) => {
         const id = nanoid();
         setToasts((prev) => [...prev, { id, message, type }]);
         setTimeout(() => removeToast(id), duration);

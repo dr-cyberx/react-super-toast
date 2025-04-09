@@ -1,9 +1,9 @@
-import { Toast as ToastType } from '../types';
 import { X } from 'lucide-react';
 import { useToastContext } from '../context/ToastContext';
 import clsx from 'clsx';
+import { iToast, iToastType } from '../types';
 
-const toastTypeStyles: Record<ToastType['type'], string> = {
+const toastTypeStyles: Record<iToastType, string> = {
     success: 'bg-green-500 text-white',
     error: 'bg-red-500 text-white',
     info: 'bg-blue-500 text-white',
@@ -11,7 +11,7 @@ const toastTypeStyles: Record<ToastType['type'], string> = {
     default: 'bg-gray-800 text-white',
 };
 
-export const Toast = ({ id, message, type }: ToastType) => {
+export const Toast = ({ id, message, type }: iToast) => {
     const { removeToast } = useToastContext();
 
     return (

@@ -1,7 +1,7 @@
 import { useToastContext } from '../context/ToastContext';
 import { Toast } from './Toast';
 
-export const ToastContainer = () => {
+export const Toaster = () => {
     const { toasts } = useToastContext();
 
     return (

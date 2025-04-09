@@ -6,12 +6,13 @@ export default defineConfig({
   plugins: [react(), dts()],
   build: {
     lib: {
-      entry: "src/index.ts",
-      name: "ReactToastLib",
-      fileName: (format) => `index.${format}.js`,
+      entry: "src/index.ts", // Your library entry point
+      name: "ReactSuperToast", // The name of your library
+      fileName: (format) => `my-library.${format}.js`, // Output file name
+      formats: ["es", "umd"], // Output formats
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom"], // Don't bundle these
       output: {
         globals: {
           react: "React",
