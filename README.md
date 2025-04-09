@@ -1,6 +1,6 @@
 # 🚀 react-super-toast
 
-> A lightweight and customizable toast notification library for React ⚡
+> A oooo lightweight and customizable toast notification library for React ⚡
 
 ## ✨ Features
 
