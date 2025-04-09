@@ -59,5 +59,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dr-cyberx/react-super-toast.git"
+  },
+  "homepage": "https://github.com/dr-cyberx/react-super-toast#readme",
+  "bugs": {
+    "url": "https://github.com/dr-cyberx/react-super-toast/issues"
   }
 }
