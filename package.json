@@ -1,6 +1,6 @@
 {
   "name": "react-super-toast",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "dist/my-library.umd.js",
   "module": "dist/my-library.es.js",
   "types": "dist/types.d.ts",
