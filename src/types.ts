@@ -12,7 +12,7 @@ export interface iToast {
   id: string;
   message: string;
   type: iToastType;
-  size?: "small" | "medium" | "big"; // Add this
+  size?: "small" | "medium" | "large"; // Add this
   position?: ToastPosition; // Add this if not already
 }
 

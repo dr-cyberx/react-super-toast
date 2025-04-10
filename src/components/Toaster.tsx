@@ -3,6 +3,7 @@ import { ToastPosition, useToastContext } from '../context/ToastContext';
 import { Toast } from './Toast';
 import { positionStyles } from './toast.utils';
 
+
 export const Toaster = ({ position }: { position: ToastPosition }) => {
     const { toasts } = useToastContext();
 
