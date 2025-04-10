@@ -41,7 +41,7 @@ export const Toast = ({ id, message, type, size = 'medium', position = 'top-righ
             }
         >
             <span className="flex-1">{message}</span>
-            <button onClick={() => removeToast(id)} className="ml-2">
+            <button onClick={() => removeToast(id)} className="ml-2" aria-label="close-toast">
                 <X className="w-4 h-4" size={iconSizeMap[size]} />
             </button>
         </motion.div>

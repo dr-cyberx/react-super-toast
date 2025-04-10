@@ -28,13 +28,13 @@ export const toastTypeStyles: Record<iToastType, string> = {
 export const toastSizeStyles: Record<NonNullable<iToast["size"]>, string> = {
   small: "text-sm py-1 px-2",
   medium: "text-base py-2 px-4",
-  big: "text-lg py-3 px-6",
+  large: "text-lg py-3 px-6",
 };
 
 export const iconSizeMap: Record<NonNullable<iToast["size"]>, number> = {
   small: 14,
   medium: 16,
-  big: 20,
+  large: 20,
 };
 
 export const positionStyles: Record<ToastPosition, string> = {

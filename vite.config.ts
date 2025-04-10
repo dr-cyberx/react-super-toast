@@ -1,4 +1,5 @@
-import { defineConfig } from "vite";
+// import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 
@@ -6,13 +7,13 @@ export default defineConfig({
   plugins: [react(), dts()],
   build: {
     lib: {
-      entry: "src/index.ts", // Your library entry point
-      name: "ReactSuperToast", // The name of your library
-      fileName: (format) => `my-library.${format}.js`, // Output file name
-      formats: ["es", "umd"], // Output formats
+      entry: "src/index.ts",
+      name: "ReactSuperToast",
+      fileName: (format) => `my-library.${format}.js`,
+      formats: ["es", "umd"],
     },
     rollupOptions: {
-      external: ["react", "react-dom"], // Don't bundle these
+      external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
@@ -20,5 +21,10 @@ export default defineConfig({
         },
       },
     },
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
   },
 });

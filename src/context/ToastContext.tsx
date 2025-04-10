@@ -17,7 +17,7 @@ interface ToastContextProps {
     position?: ToastPosition;
 }
 
-const ToastContext = createContext<ToastContextProps | undefined>(undefined);
+export const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
 export const ToastProvider = ({
     children,
@@ -35,7 +35,10 @@ export const ToastProvider = ({
     ) => {
         const id = nanoid();
         setToasts((prev) => [...prev, { id, message, type }]);
-        setTimeout(() => removeToast(id), duration);
+        setTimeout(() => {
+            setToasts((prev) => prev.filter((toast) => toast.id !== id));
+        }, duration);
+
     };
 
     const removeToast = (id: string) => {
