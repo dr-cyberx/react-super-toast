@@ -1,19 +1,38 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { iToastType, iToast } from '../index';
-import { nanoid } from 'nanoid';
+import { createContext, useContext, useState, ReactNode } from "react";
+import { iToastType, iToast } from "../index";
+import { nanoid } from "nanoid";
+
+export type ToastPosition =
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
 
 interface ToastContextProps {
     addToast: (message: string, type?: iToastType, duration?: number) => void;
     removeToast: (id: string) => void;
     toasts: iToast[];
+    position?: ToastPosition;
 }
 
 const ToastContext = createContext<ToastContextProps | undefined>(undefined);
 
-export const ToastProvider = ({ children }: { children: ReactNode }) => {
+export const ToastProvider = ({
+    children,
+    position = "top-right",
+}: {
+    children: ReactNode;
+    position?: ToastPosition;
+}) => {
     const [toasts, setToasts] = useState<iToast[]>([]);
 
-    const addToast = (message: string, type: iToastType = 'default', duration = 3000) => {
+    const addToast = (
+        message: string,
+        type: iToastType = "default",
+        duration = 3000
+    ) => {
         const id = nanoid();
         setToasts((prev) => [...prev, { id, message, type }]);
         setTimeout(() => removeToast(id), duration);
@@ -24,7 +43,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <ToastContext.Provider value={{ addToast, removeToast, toasts }}>
+        <ToastContext.Provider value={{ position, addToast, removeToast, toasts }}>
             {children}
         </ToastContext.Provider>
     );
@@ -32,6 +51,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
 
 export const useToastContext = () => {
     const context = useContext(ToastContext);
-    if (!context) throw new Error('useToastContext must be used within a ToastProvider');
+    if (!context)
+        throw new Error("useToastContext must be used within a ToastProvider");
     return context;
 };

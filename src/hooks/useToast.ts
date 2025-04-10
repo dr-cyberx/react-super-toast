@@ -14,6 +14,8 @@ export const useToast = () => {
         addToast(msg, "warning", duration),
       default: (msg: string, duration?: number) =>
         addToast(msg, "default", duration),
+      chameleon: (msg: string, duration?: number) =>
+        addToast(msg, "chameleon", duration),
     },
   };
 };
