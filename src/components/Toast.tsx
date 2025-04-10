@@ -1,30 +1,50 @@
 import { X } from 'lucide-react';
 import { useToastContext } from '../context/ToastContext';
 import clsx from 'clsx';
-import { iToast, iToastType } from '../types';
+import { motion } from 'framer-motion';
+import { useMemo } from 'react';
+import { iToast, } from '../types';
+import { getAnimationByPosition, getRandomRainbowColor, iconSizeMap, toastSizeStyles, toastTypeStyles } from './toast.utils';
 
-const toastTypeStyles: Record<iToastType, string> = {
-    success: 'bg-green-500 text-white',
-    error: 'bg-red-500 text-white',
-    info: 'bg-blue-500 text-white',
-    warning: 'bg-yellow-500 text-black',
-    default: 'bg-gray-800 text-white',
-};
-
-export const Toast = ({ id, message, type }: iToast) => {
+export const Toast = ({ id, message, type, size = 'medium', position = 'top-right' }: iToast) => {
     const { removeToast } = useToastContext();
 
+    const chameleonColors = useMemo(() => {
+        return {
+            from: getRandomRainbowColor(),
+            to: getRandomRainbowColor(),
+        };
+    }, []); // only compute once when the component mounts
+
+    const animation = getAnimationByPosition(position);
+
+
     return (
-        <div
+        <motion.div
+            id={id}
+            layout
+            initial={animation.initial}
+            animate={animation.animate}
+            exit={animation.exit}
+            transition={{ duration: 0.3 }}
             className={clsx(
-                'rounded-lg px-4 py-2 shadow-md mb-3 flex items-center justify-between gap-2 animate-slide-in',
-                toastTypeStyles[type]
+                'rounded-lg shadow-md mb-3 flex items-center justify-between gap-2 text-white',
+                type !== 'chameleon' && toastTypeStyles[type],
+                toastSizeStyles[size]
             )}
+            style={
+                type === 'chameleon'
+                    ? {
+                        background: `linear-gradient(to right, ${chameleonColors.from}, ${chameleonColors.to})`,
+                    }
+                    : undefined
+            }
         >
             <span className="flex-1">{message}</span>
             <button onClick={() => removeToast(id)} className="ml-2">
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4" size={iconSizeMap[size]} />
             </button>
-        </div>
+        </motion.div>
+
     );
 };
