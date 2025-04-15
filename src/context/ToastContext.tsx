@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { iToastType, iToast } from "../index";
 import { nanoid } from "nanoid";
+import { ToastDefaults } from "../types";
 
 export type ToastPosition =
     | "top-left"
@@ -15,30 +16,42 @@ interface ToastContextProps {
     removeToast: (id: string) => void;
     toasts: iToast[];
     position?: ToastPosition;
+    toastDefaults?: ToastDefaults;
 }
 
-export const ToastContext = createContext<ToastContextProps | undefined>(undefined);
+export const ToastContext = createContext<ToastContextProps | undefined>(
+    undefined
+);
 
 export const ToastProvider = ({
     children,
-    position = "top-right",
+    toastDefaults,
 }: {
     children: ReactNode;
-    position?: ToastPosition;
+    toastDefaults?: ToastDefaults;
 }) => {
     const [toasts, setToasts] = useState<iToast[]>([]);
 
     const addToast = (
         message: string,
         type: iToastType = "default",
-        duration = 3000
+        duration = 3000,
     ) => {
         const id = nanoid();
-        setToasts((prev) => [...prev, { id, message, type }]);
+
+        setToasts(prev => [
+            ...prev,
+            {
+                id,
+                message,
+                type,
+                ...toastDefaults, // defaults (position, notification, styleOverrides, etc)
+            },
+        ]);
+
         setTimeout(() => {
             setToasts((prev) => prev.filter((toast) => toast.id !== id));
         }, duration);
-
     };
 
     const removeToast = (id: string) => {
@@ -46,7 +59,9 @@ export const ToastProvider = ({
     };
 
     return (
-        <ToastContext.Provider value={{ position, addToast, removeToast, toasts }}>
+        <ToastContext.Provider
+            value={{ toasts, addToast, removeToast, toastDefaults }}
+        >
             {children}
         </ToastContext.Provider>
     );

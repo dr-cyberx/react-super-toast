@@ -1,5 +1,13 @@
 import { ToastPosition } from "../context/ToastContext";
 import { iToast, iToastType } from "../types";
+import {
+  CheckCircle,
+  XCircle,
+  Info,
+  AlertTriangle,
+  MessageCircle,
+  Sparkles,
+} from "lucide-react";
 
 export const rainbowColors = [
   "#FF0000", // Red
@@ -17,12 +25,14 @@ export function getRandomRainbowColor() {
 }
 
 export const toastTypeStyles: Record<iToastType, string> = {
-  success: "bg-green-500 text-white",
-  error: "bg-red-500 text-white",
-  info: "bg-blue-500 text-white",
-  warning: "bg-yellow-500 text-black",
-  default: "bg-gray-800 text-white",
-  chameleon: `text-white`,
+  success: "bg-green-500 text-white shadow-lg", // White text for high contrast
+  error: "bg-red-500 text-white shadow-lg", // White text for high contrast
+  info: "bg-blue-500 text-white shadow-lg", // White text for high contrast
+  warning: "bg-yellow-500 text-black shadow-lg", // Black text for better readability on yellow background
+  default: "bg-gray-800 text-white shadow-lg", // White text on dark background
+  chameleon: `text-white shadow-lg`, // For rainbow effect
+  modern: "bg-white/30 text-black backdrop-blur-md shadow-lg", // Modern style with black text for better readability
+  modernDark: "bg-black/60 text-white backdrop-blur-md shadow-lg", // Modern dark style with white text and dark semi-transparent background
 };
 
 export const toastSizeStyles: Record<NonNullable<iToast["size"]>, string> = {
@@ -79,4 +89,15 @@ export const getAnimationByPosition = (position: string) => {
     animate: { opacity: 1 },
     exit: { opacity: 0 },
   };
+};
+
+export const iconMap: Record<string, React.ReactElement> = {
+  success: <CheckCircle className="text-white" size={20} />,
+  error: <XCircle className="text-white" size={20} />,
+  info: <Info className="text-white" size={20} />,
+  warning: <AlertTriangle className="text-white" size={20} />,
+  default: <MessageCircle className="text-white" size={20} />,
+  chameleon: <Sparkles className="text-white" size={20} />,
+  modern: <></>,
+  "modern-dark": <></>,
 };

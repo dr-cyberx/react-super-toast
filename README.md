@@ -63,14 +63,12 @@ useToast()
 Returns an object with toast functions:
 
     toast.default(message: string, duration?: number)
-
     toast.success(message: string, duration?: number)
-
     toast.error(message: string, duration?: number)
-
     toast.warning(message: string, duration?: number)
-
     toast.chameleon(message: string, duration?: number)
+    toast.modern(message: string, duration?: number)
+    toast.darkModern(message: string, duration?: number)
 
 ```
 
@@ -83,15 +81,10 @@ Returns an object with toast functions:
 other options:
 
     'top-left'
-
     'top-center'
-
     'top-right'
-
     'bottom-left'
-
     'bottom-center'
-
     'bottom-right'
 
 ```

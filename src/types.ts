@@ -6,14 +6,17 @@ export type iToastType =
   | "info"
   | "warning"
   | "default"
-  | "chameleon";
-
+  | "chameleon"
+  | "modern" // Add "modern" here
+  | "modernDark"; // Add "modernDark" here
 export interface iToast {
   id: string;
   message: string;
   type: iToastType;
   size?: "small" | "medium" | "large"; // Add this
   position?: ToastPosition; // Add this if not already
+  notification?: boolean;
+  toastDefaults?: ToastDefaults; // Add this if not already
 }
 
 export interface iToastOptions {
@@ -28,4 +31,12 @@ export interface ToastContextType {
 export interface iToastProviderProps {
   children: React.ReactNode;
   duration?: number;
+}
+
+// types.ts
+export interface ToastDefaults {
+  position?: ToastPosition;
+  size?: "small" | "medium" | "large";
+  styleOverrides?: React.CSSProperties;
+  notification?: boolean;
 }

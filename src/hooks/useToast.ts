@@ -16,6 +16,10 @@ export const useToast = () => {
         addToast(msg, "default", duration),
       chameleon: (msg: string, duration?: number) =>
         addToast(msg, "chameleon", duration),
+      modern: (msg: string, duration?: number) =>
+        addToast(msg, "modern", duration), // Modern style: Blur effect
+      modernDark: (msg: string, duration?: number) =>
+        addToast(msg, "modernDark", duration), // Modern dark style: Blur effect with dark background
     },
   };
 };
