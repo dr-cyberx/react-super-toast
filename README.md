@@ -48,7 +48,17 @@ function App() {
       </button>
 
       {/* Place this near the root of your app layout */}
-      <Toaster position="top-left" />
+     <Toaster
+        position="bottom-right"
+        notification
+        toastDefaults={
+          {
+            position: "bottom-center",
+            size: "large",
+            notification: true,
+          }
+        }
+      />
     </div>
   );
 }
